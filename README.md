@@ -1,0 +1,6 @@
+# AINOS
+Social Connect Website (Mini Version)
+The training was based on building a social/public image gallery on web(similar to instagram). The website lets you login and post images that will be visible to the registered users of the website. A user can add posts, like the posts, comment and reply on these posts in Realtime. Other functions like deleting and editing posts are also available. All the user data is stored in a Realtime Database, Firebase. 
+The project is mainly built on Jquery along with the usage of Firebase's functions that make it Realtime. 
+Realtime basically means that all the changes that occur in the database are reflected immediately and spontaneously on the website without having to refresh the page. This feature acts as a major advantage as this helps in consistency of data and allows multiple users to access the website simultaneously without any inconsistency or false data. For example, if someone deletes a post, the post will disappear   from all the active windows and systems that are accessing the website at the same time.
+Firebase Database service provides the developer with a unique project key that helps to initialize the database. These particular code lines (above) need to be added to the JavaScript code of the project  to access the database from our JavaScript code. 
