@@ -1,0 +1,828 @@
+<!doctype html>
+<html>
+<head>
+    <title>AINOS</title>
+    <link rel="icon" type="image/png" href="https://b.zmtcdn.com/images/logo/zomato_favicon5.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta name="google-site-verification" content="LX1wRlrPgRd3GWMOGltp7D0U7uESSwW5sdpB3fWCZNk" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://www.hometurph.com/Themes/newdesign/fonts/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="styles.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div class="se-pre-con"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="main-nav">
+                <a id="resp-menu" class="responsive-menu" href="#"><i class="fa fa-reorder"></i> Menu</a>
+                <div class="clearfix"></div>
+            </nav>
+            <div class="banner_area">
+                <div class="banner_overlay"></div>
+                <div class="logo_test">
+                    <span id="userimg">AINOS</span>
+                </div>
+                <div class="project_login">
+                    <a id="logitbtn" data-toggle="modal" data-target="#myModal1">Login</a>
+                    <a id="logoutbtn" style="display:none;float:right;">Logout</a>
+                    <a id="postbtn" style="display:none;float:right;" data-toggle="modal" data-target="#AddPostModal">Add Post</a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="sec_cont">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="project_heading"></h2>
+                        <div id="binddata">
+                            <!--bind all post-->
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Add post modal-->
+    <div class="modal fade" id="AddPostModal" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" href="#AddPost">Add Post</a></li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div id="AddPost" class="tab-pane fade in active">
+                        <form role="form">
+                            <h3>Description:</h3>
+                            <input class="form-control input-lg" id="description" type="text" name="description" placeholder="Description" />
+                            <br />
+                            <h3>Post Url:</h3>
+                            <!--<input class="form-control input-lg" placeholder="Image URL" id="post_url" type="text" name="post_url" />-->
+                            <input id="post_url" type="file" />
+                            <div class="modal-footer">
+                                <button id="addpost_btn" type="button" class="btn btn-primary">Add Post</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--login/sign popup modal-->
+    <div id="myModal1" class="modal fade" role="dialog">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#Login">Login</a></li>
+                        <li><a data-toggle="tab" href="#signup">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-content">
+                        <div id="Login" class="tab-pane fade in active">
+                            <form role="form" action="#">
+                                <br />
+                                <h3>Email</h3>
+                                <br />
+                                <input class="form-control input-lg" id="loginemail" type="email" name="username" placeholder="Username/Email" />
+                                <br />
+                                <h3 style="margin: -4px 0px -13px -1px;">Password</h3>
+                                <br />
+                                <input class="form-control input-lg" id="loginpassword" type="password" name="password" placeholder="Password" />
+                                <div class="modal-footer">
+                                    <button id="loginbtn" type="button" class="btn btn-success">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="signup" class="tab-pane fade">
+                            <form role="form" action="#">
+                                <br />
+                                <h3>Name:</h3>
+                                <br />
+                                <input class="form-control input-lg" type="text" name="name" id="name" placeholder="Full Name" />
+                                <br />
+                                <h3>Email:</h3>
+                                <br />
+                                <input class="form-control input-lg" type="email" name="email" id="email" placeholder="Enter Email (e.g. dodo@abc.com)" />
+                                <br />
+                                <h3 style="margin: -4px 0px -13px -1px;">Password</h3>
+                                <br />
+                                <input class="form-control input-lg" type="password" name="password" id="signup_password" placeholder="Enter Password (mini.6 char)" />
+                                <br />
+                                <h3>Profile Image url:</h3>
+                                <br />
+                                <input id="profile_pic" type="file" />
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" id="signUpbtn">Sign Up</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--bind comment modal popup-->
+    <div id="myModal" class="modal fade" role="dialog">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body" id="commentarea">
+                    <div class="col-md-8" id="posturl">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSysv10tsk34uarw9BuWYlrfHW3zDfRgpRtD7iwMeBY6lAaydMG" alt="">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-3" id="usersnapss">
+                            <!--<img src="images/personal.png" alt="">-->
+                            <!--<p id="postdesc">dispriction</p>-->
+                        </div>
+                        <div class="discription col-md-9">
+                            <h3 id="username">username</h3>
+                            <p></p>
+                        </div>
+                        <div class="like_dislike1">
+                            <!--<a class="like" style="font-size: 12px;font-weight: 600;">0 likes</a>
+                             <a class="comment" style="font-size: 12px;color: blue;"> 0 comments</a>-->
+                        </div>
+                        <div id="textcom">
+                            <!--<textarea id="txtcom"></textarea>
+                            <input id="combtn" type="button" class="btn btn-primary" value="Add" />-->
+                        </div>
+                        <div class="col-md-12" style="overflow-y:auto; max-height:280px;">
+                            <div class="link_like">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Alert Modal -->
+    <div class="modal fade" id="alertModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background: #8a2121">
+                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <h4 style="color:#fff;" id="alerttxt" class="modal-title"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Footer-->
+    <div class="copyRight">
+        <div class="copy">Copyright © 2017 . All rights reserved. </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/src/database/js-client/core/operation/AckUserWrite.js"></script>
+    <script type="text/javascript">
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBLGKQgDoYZUA237zeLHKyWqh9AUDtZ8ME",
+            authDomain: "sonia-38b6c.firebaseapp.com",
+            databaseURL: "https://sonia-38b6c.firebaseio.com",
+            projectId: "sonia-38b6c",
+            storageBucket: "sonia-38b6c.appspot.com",
+            messagingSenderId: "632075902671"
+        };
+        firebase.initializeApp(config);
+        var loginid = "";
+        var ref = firebase.database().ref();
+        var storref = firebase.storage().ref();
+        var postsref = ref.child('Post');
+        var commentsref = ref.child('comments');
+        var likesref = ref.child('likes');
+        var usersref = ref.child('User');
+    </script>
+    <script type="text/javascript">
+        firebase.auth().onAuthStateChanged(function (user) {
+            $('.se-pre-con').fadeIn('fast').delay(1000).fadeOut('slow');
+            if (user) {
+                $("#logoutbtn").css("display", "block");
+                $("#postbtn").css("display", "block");
+                $("#logitbtn").css("display", "none");
+               
+                loginid = user.uid;
+
+                var userref = usersref.child(loginid);
+                userref.once('value', function (usersnap) {
+                    var dpRef = storref.child('/images/' + loginid);
+                    dpRef.getDownloadURL().then(function (url) {
+                        $('#userimg').html("AINOS<img title=" + usersnap.val().Name + " class='userimg' src='" + url + "' alt='" + usersnap.val().Name + "'>");
+                    });
+                });
+
+                $('#binddata').html("");
+
+                binddata(user.uid);
+            } else {
+                $("#logoutbtn").css("display", "none");
+                $('#userimg').html("").text("AINOS");
+                $("#postbtn").css("display", "none");
+                $("#logitbtn").css("display", "block");
+                $("#myModal1").modal('show');
+            }
+            //bind complete data
+        });
+        //signup
+        $('#profile_pic').on("change", function (event) {
+            selectedFiles = event.target.files[0];
+        });
+        $("#signUpbtn").click(function () {
+            var userName = $("#name").val();
+            var userEmail = $("#email").val();
+            var userPassword = $("#signup_password").val();
+            if ($("#name").val().replace(/\s/g, '').length == 0) {
+                $('#name').css("border", "1px solid red");
+                return false;
+            }
+            if ($("#email").val().replace(/\s/g, '').length == 0) {
+                $('#email').css("border", "1px solid red");
+                return false;
+            }
+
+            if (!ValidateEmail($("#email").val())) {
+                $('#email').css("border", "1px solid red");
+                return false;
+            }
+
+
+            if ($("#signup_password").val().replace(/\s/g, '').length < 6) {
+                $('#signup_password').css("border", "1px solid red");
+                return false;
+            }
+            var imgVal = $('#profile_pic').val();
+            if (imgVal == '') {
+                $('#profile_pic').css("border", "1px solid red");
+                return false;
+            }
+
+
+
+            // var userImage = $("#profile_pic").val();
+            createUser(userEmail, userPassword, userName);
+        });
+        function ValidateEmail(email) {
+            var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            return expr.test(email);
+        }
+        $('#name').keyup(function () {
+            var $th = $(this);
+            $th.val($th.val().replace(/[^a-zA-Z]/g, function (str) { return ''; }));
+        });
+
+
+        // add new user function
+        // var auth = firebase.auth();
+        function createUser(email, pass, name) {
+            firebase.auth().createUserWithEmailAndPassword(email, pass).then(function (user) {
+                // alert('everything went fine');
+                // alert('user object:' + user.uid);
+                var uid = user.uid;
+                //you can save the user data here.
+                writedata(name, uid);
+
+
+                var userref = usersref.child(uid);
+
+                 setTimeout(
+                          function () {
+
+                userref.once('value', function (usersnap) {
+                    var dpRef = storref.child('/images/' + uid);
+                    dpRef.getDownloadURL().then(function (url) {
+                        $('#userimg').html("AINOS<img title=" + usersnap.val().Name + " class='userimg' src='" + url + "' alt='" + usersnap.val().Name + "'>");
+                    });
+                });
+
+                }, 5000);
+
+                $('#name').val('');
+                $('#email').val('');
+                $('#profile_pic').val('');
+                $('#signup_password').val('');
+                $("#myModal1").modal('hide');
+            }).catch(function (error) {
+                //   alert('there was an error');
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                $('#alerttxt').text(errorCode);
+                $("#alertModal").modal('show');
+                //alert(errorCode + ' - ' + errorMessage);
+            });
+        }
+        function writedata(name, uid) {
+            usersref.child(uid).set({
+                Name: name
+            });
+            var filename = selectedFiles.name;
+            var storageref = storref.child('/images/' + uid);
+            var uploadtask = storageref.put(selectedFiles);
+        }
+        //signup end
+        //login
+        $('#loginbtn').click(function () {
+            // $("#modal88").modal('hide');
+            var email = $('#loginemail').val();
+            var password = $('#loginpassword').val();
+            loginUser(email, password);
+        });
+        function loginUser(email1, password1) {
+            firebase.auth().signInWithEmailAndPassword(email1, password1).then(function (user) {
+                firebase.auth().onAuthStateChanged(function (user) {
+                    if (user) {
+                        // User is signed in.
+                        //  var displayName = user.displayName;
+                        var emailss = user.email;
+                        //  var emailVerified = user.emailVerified;
+                        //  var photoURL = user.photoURL;
+                        //  var isAnonymous = user.isAnonymous;
+                        var uid = user.uid;
+
+                        // loginid(uid);
+                        //  var providerData = user.providerData;
+                        $('#loginemail').val('');
+                        $('#loginpassword').val('');
+                        $("#myModal1").modal('hide');
+
+                    } else {
+                        // User is signed out.
+                        // ...
+                    }
+                });
+
+            }).catch(function (error, user) {
+                if (error.code == "auth/user-not-found")
+                    $('#alerttxt').text("User Not Found!");
+                else if (error.code == "auth/wrong-password")
+                    $('#alerttxt').text("User/Password incorrect.");
+                else
+                    $('#alerttxt').text(error.code);
+                $("#alertModal").modal('show');
+                // alert(error.code);
+                // alert(error.message);
+            });
+        }//login end
+        //logout
+        $('#logoutbtn').click(function () {
+            firebase.auth().signOut().then(function () {
+                $('#binddata').html("");
+                //$('#alerttxt').text('Logged Out!');
+                //$("#alertModal").modal('show');
+                $('#userimg').html("").text("AINOS");
+                location.reload();
+                $("#myModal1").modal('show');
+                loginid = "";
+            }, function (error) {
+                $('#alerttxt').text(error.code);
+                $("#alertModal").modal('show');
+                //alert(error.code);
+                //alert(error.message);
+            });
+        });
+        //image upload
+        $('#post_url').on("change", function (event) {
+            selectedFile = event.target.files[0];
+        });
+        //add post
+        $("#addpost_btn").click(function () {
+            var description = $("#description").val();
+            if ($("#description").val().replace(/\s/g, '').length == 0) {
+                $('#description').css("border", "1px solid red");
+                return false;
+            }
+            var imgVal = $('#post_url').val();
+            if (imgVal == '') {
+                $('#post_url').css("border", "1px solid red");
+                return false;
+            }
+            //  var post_url = $("#post_url").val();
+            addpost(description, loginid);
+            $("#description").val('');
+            $('#post_url').val('');
+            $('#AddPostModal').modal('hide');
+        });
+        // add new post function
+        function addpost(description, loginid) {
+            var Edate = firebase.database.ServerValue.TIMESTAMP;
+            var postid = postsref.push().key;
+                postsref.child(postid).set({
+                Description: description,
+                Entrydate: Edate,
+                Uid: loginid
+            });
+            var filename = selectedFile.name;
+            var storageref = storref.child('/postimages/' + postid);
+            var uploadtask = storageref.put(selectedFile);
+        }
+        //function to bind post
+        function binddata(loginid) {
+          
+                      // if new post added
+            postsref.on('child_added', function (message) {
+                if (!newItems) return;
+                else {
+                    setTimeout(
+                          function () {
+
+                             
+                              usersref.child(pdata.Uid).once('value', function (mediaSnap) {
+                                  var starsRef = storref.child('/postimages/' + message.key);
+                                  // Get the download URL
+                                  starsRef.getDownloadURL().then(function (url) {
+                                     
+
+                                      $("#binddata").prepend("<div id='" + message.key + "' class='col-md-4 col-sm-6 view effect'>"
+                                                            + "<img src='" + url + "' alt=''>" // post image url path
+                                                            + "<div class='like_dislike'>"
+                                                            + "<a  class='like' ><i class='fa fa-heart' id='li_" + message.key + "' style='color: #b3b3ff !important' onclick=likePost('" + message.key + "','" + loginid + "') ><div class='badge'>0</div></i></a>"
+                                                            + "<a  class='comment' ><i data-toggle='modal' data-target='#myModal' class='fa fa-comment' id='com_-" + message.key + "' onclick=bindcomment('" + message.key + "','" + loginid + "')></i></a>"
+                                                            + "</div>"
+                                                            + "<div class='delete_post'><a  class='delete' ><i class='glyphicoglyphicon n-trash' id='del_" + message.key + "' onclick=deletePost('" + message.key + "') ></i></a></div>"
+                                                            + "<div class='mask'></div>"
+                                                            + "<div class='content'>"
+                                                            + "<a  class='info' title=''><p>" + pdata.Description + "</p></a>"
+                                                            + "</div>"
+                                                            + "</div>"
+
+                                                            );
+                                  });
+                              });
+                          }, 3000);
+                    var pdata = message.val();
+                    
+                }
+            });
+            // delete post data
+            postsref.on('child_removed', function (message) {
+                $('#' + message.key).remove();
+            });
+            // bind all post
+            postsref.once('value', function (snap) {
+                newItems = true;
+                snap.forEach(function (data) {
+                    var pdata = data.val(); //  get all post item data
+                    var userId = pdata.Uid; //  userid of post
+                    var likecount = 0;
+                    var likeid = 0;
+                    var likedkey = "";
+                    var commentcount = 0;
+                    var likeref = likesref.child(data.key);// likes url based on post id
+                    likeref.once('value', function (likeSnap) {
+                        likeSnap.forEach(function (likedata) {
+                            var ldata = likedata.val();
+                            if (ldata.userid == loginid) {
+                                likeid = likeid + 1;
+                                likedkey = likedata.key;
+                            }
+                        });
+                        var likecount = likeSnap.numChildren(); // total like count on perticular post
+                        // get comment count
+                      
+                            commentsref.child(data.key).once('value', function (commentSnap) {
+                            commentcount = commentSnap.numChildren();
+
+                            $('#binddata').html(""); // clear html data
+                            // user details of post and binding post complete data html
+                            //database.child('User').child(userId).once('value', function (mediaSnap) {
+                            var starsRef = storref.child('/postimages/' + data.key);
+                            // Get the download URL
+                            starsRef.getDownloadURL().then(function (url) {
+                                $("#binddata").append("<div id='" + data.key + "' class='col-md-4 col-sm-6 view effect'>"
+                                                        + "<img src='" + url + "' alt=''>" // post image url path
+                                                        + "<div class='like_dislike'>"
+                                                        // condition to check post liked by current user or not
+                                                        + (likeid > 0 ? "<a  class='like' ><i class='fa fa-heart' id='un_" + data.key + "' onclick=unlikePost('" + likedkey + "','" + data.key + "','" + loginid + "') ><div class='badge'>" + likecount + "</div></i></a>" : "<a  class='like' ><i class='fa fa-heart' id='li_" + data.key + "' style='color: #b3b3ff !important' onclick=likePost('" + data.key + "','" + loginid + "') ><div class='badge'>" + likecount + "</div></i></a>")
+                                                        // comment count
+                                                        + "<a  class='comment' ><i  data-toggle='modal' data-target='#myModal' class='fa fa-comment' id='com_" + data.key + "' onclick=bindcomment('" + data.key + "','" + loginid + "')><div class='badge'>" + commentcount + "</div></i></a>"
+                                                        + "</div>"
+                                                        // delete post
+                                                        + (loginid == userId ? "<div class='delete_post'><a  class='delete' ><i class='glyphicon glyphicon-trash' id='del_" + data.key + "' onclick=deletePost('" + data.key + "') ></i></a></div>" : "")
+
+                                                        + "<div class='mask'></div>"
+                                                        + "<div class='content'>"
+                                                        //  post description
+                                                        + "<a  class='info' title=''><p>" + pdata.Description + "</p></a>"
+                                                        + "</div>"
+                                                        + "</div>");
+                            }); // end binddata foreach
+                            //});
+                        });// end comment
+                    });// end likeref
+                });// end snap foreach
+            }); // end postref
+        }// end function binddata
+        // delete post
+        function deletePost(postid) {
+            if (confirm("Are you sure?")) {
+                postsref.child(postid).remove();
+                likesref.child(postid).remove();
+                commentsref.child(postid).remove();
+            }
+            return false;
+        }
+        // start like section---------------------------------------------
+        // function like perticular post
+        function likePost(postid, loginid) {
+            // generate new id for insert like
+            var keyid = likesref.push().key;
+            likesref.child(postid + '/' + keyid)
+            .set({
+                userid: loginid
+            });
+            // get current like count
+            var like_count = parseInt($('#li_' + postid).children().text());
+            like_count = like_count + 1; // increase like count by 1
+            // bind current likes count in perticular post
+            $('#li_' + postid).parent().html("<i class='fa fa-heart' id='un_" + postid + "' onclick=unlikePost('" + keyid + "','" + postid + "','" + loginid + "') ><div class='badge'>" + like_count + "</div></i>");
+
+        }// end likepost function
+
+        // function unlike perticular post
+        function unlikePost(llikedkey, postid, loginid) {
+            // remove id for likes table of this post
+            likesref.child(postid).child(llikedkey).remove();
+            var unlike_count = parseInt($('#un_' + postid).children().text());// get current like count
+            unlike_count = unlike_count - 1; // decrease like count by 1
+            // remove likecount and bind new count in post
+            $('#un_' + postid).parent().html("<i class='fa fa-heart' id='li_" + postid + "' style='color: #b3b3ff !important' onclick=likePost('" + postid + "','" + loginid + "') ><div class='badge'>" + unlike_count + "</div></i>");
+        }
+        // end like section ----------------------------------------------
+        // start comment section---------------------------------------------
+        // function to bind comments of current post
+        function bindcomment(postid, loginid, likecount) {
+            var isInitialValueDone = true;
+            //debugger;
+            //clear post image path is any on model popup on comment click
+            $('#posturl').html("");
+            var valpost = "";
+            var commentcount = 0;
+            var likecount = 0;
+            //get commenturl by post id
+            commentsref.child(postid).once('value', function (commentsnap) {
+                commentcount = commentsnap.numChildren();
+                var likeref = ref.child('likes').child(postid);
+                likeref.once('value', function (likesnap) {
+                    likecount = likesnap.numChildren();
+                    $('.like_dislike1').html("").html(" <a  class='like dropdown' style='font-size: 12px;font-weight: 600;'>" + likecount + " likes <div id='likesusers' class='dropdown-content'></div></a><a class='comment' style='font-size: 12px;color: blue;'> " + commentcount + " comments</a>");
+
+                });
+            });
+            // bind testbox and button to insert new comments
+            $('#textcom').html("<textarea onblur='clears()' id='txtcom'></textarea><input id='combtn' onclick= insertcomment('" + postid + "','" + loginid + "') type='button' class='btn btn-primary' value='Add' />");
+            // get post details by post id
+            postsref.child(postid).once('value', function (postsnap) {
+                var userid = postsnap.val().Uid;
+                //post image url
+                var starsRef = storref.child('/postimages/' + postid);
+                //var commentref = firebase.database().ref().child('comments').child(postid);
+                //commentref.once('value', function (commentsnap) {
+                // Get the download URL
+                starsRef.getDownloadURL().then(function (url) {
+                    //bind user image
+                    $('#posturl').html("<img src='" + url + "' alt=''/><p style='padding: 10px 0;'>" + postsnap.val().Description + "</p>"
+                    + (loginid == userid ? "<span class='glyphicon glyphicon-edit' style='float:right' onclick=update('" + postid + "')  data-toggle='collapse' data-target='#desc_" + postid + "'></span>"
+                    + "<div id='desc_" + postid + "' class='collapse' style='clear:both;'>"
+                    + "<input type='text' id='desctxt_" + postid + "' style='width:88%;padding: 10px 20px;' />"
+                    + "<button id='editbtn' onclick=updatedesc('" + postid + "') class='btn btn-primary btn-lg' data-toggle='collapse' data-target='#desc_" + postid + "'>Edit</button></div>" : ""));
+                    //  });
+                });
+
+                // post desc
+                // $('#postdesc').text(postsnap.val().Description);
+                //get and bind post date
+                var postdate = new Date(postsnap.val().Entrydate).toDateString();
+                $('.discription p').text(postdate);
+                // get user details by postid
+                var Image_ref = usersref.child(postsnap.val().Uid);
+                Image_ref.once('value', function (usersnap) {
+                    // username
+                    $('#username').text(usersnap.val().Name);
+                });
+                var dpRef = storref.child('/images/' + postsnap.val().Uid);
+                // Get the download URL
+                dpRef.getDownloadURL().then(function (url) {
+                    //bind user image
+                    $('#usersnapss').html("<img style='border-radius: 40px;height: 50px;' src='" + url + "' alt=''/>");
+                });
+                //corrections needed
+                //likesref.once('value', function(likes){
+               
+                likesref.child(postid).once('value', function (data) {
+                    data.forEach(function (likeUserData) {
+                        var users = likeUserData.val();
+                        var likeUserId = users.userid;
+                        var userref = usersref.child(likeUserId);
+                        userref.once('value', function (usersnap) {
+                            var dpRef = storref.child('/images/' + likeUserId);
+                            dpRef.getDownloadURL().then(function (url) {
+                                $('#likesusers').append("<div style='margin-bottom:5px;padding:0px;' class='col-md-12'><div class='col-md-3' style='padding:0;'>"
+                                + "<img class='pic' src='" + url + "' style='margin-right: 5px;'></div>"
+                                + "<div  style='padding:0px;' class='col-md-9'><p>" + usersnap.val().Name + "</p></div></div>");
+                                // $('#likesusers').append("<p>" + usersnap.val().Name + "</p>");
+                                //$('#likesusers').children("p").text(username.val().Name);
+                            });
+                        });
+                    });
+                });
+            });
+            // clear comment section to bind all commets---
+            $('.link_like').html("");
+            commentsref.child(postid).once('value', function (comsnap) {
+                //get all comments ids
+                comsnap.forEach(function (comdata) {
+                    var comid = comdata.key;
+                    var userid = comdata.val().Userid;
+                    //get user details by userid
+                    var user_image = usersref.child(userid);
+                    //get date
+                    var mydate = new Date(comdata.val().EntryDate).toDateString();
+                    user_image.once('value', function (imgurl) {
+                        var dpRef = storref.child('/images/' + userid);
+                        dpRef.getDownloadURL().then(function (url) {
+                            //bind user image
+                            // $('#usersnapss').html("<img style='border-radius: 20px;' src='" + url + "' alt=''/>");
+                            $('.link_like').append("<div>"
+                                                  + "<div class='col-md-2'><img class='pic' src='" + url + "'/></div>"
+                                                  + "<div class='col-md-10 commentdesign' >"
+                                                  + "<h5>" + imgurl.val().Name + "</h5><p>" + mydate + "</p>"
+                                                  + "<p>" + comdata.val().ComText + "<a id =" + comid + " class='reply' data-toggle='collapse' data-target='#rep_" + comid + "' onclick=reply('" + postid + "','" + loginid + "','" + comid + "')>" + bindreplycount(comid, postid) + "</a> <div style='clear:both;' id='rep_" + comid + "' class='collapse'><input type='text' id='reptxt_" + comid + "' style='width:60%;' /><button class='btn btn-danger' data-toggle='collapse' data-target='#rep_" + comid + "' onclick=shows('" + postid + "','" + loginid + "','" + comid + "')>Reply</button></div></p>"
+                                                  + " <hr></div>"
+                                               + "</div>")
+                            bindcommentreply(postid, comid);
+                        });
+                    });
+                });//end foreach
+            });//end commentref
+            // see likes user on hover
+           
+            likesref.child(postid).once('value', function (likes) {
+                likes.forEach(function (likeUserData) {
+                    var users = likeUserData.val();
+                    var likeUserId = likeUserData.userid;
+                    var userref = usersref.child(likeUserId);
+                    userref.once('value', function (usename) {
+                        $('#likesusers').append("<div id='likesusers' class='dropdown-content>" + username.val().Name + "</div>")
+                    })
+                });
+            });
+        }//end function
+        function bindreplycount(comid, postid) {
+            var replycount = commentsref.child(postid).child(comid).child(comid);
+            var count_reply = 0;
+            replycount.once('value', function (replysnap) {
+                $('#' + comid).text(replysnap.numChildren() + " Reply");
+            });
+        }
+        // hide reply button
+        function reply(postid, loginid, commentid) {
+            $("#rep_" + commentid).siblings("a").css("display", "none");
+        }
+        // show reply text and button to insert reply on perticular comment
+        function shows(postid, loginid, commentid) {
+            var commentid = commentid;
+            var loginid = loginid;
+            $("#rep_" + commentid).prev().css("display", "block");
+            insertreply(postid, loginid, commentid);
+        }
+        // insert rely on perticular comment
+        function insertreply(postid, loginid, commentid) {
+            var replytext = $("#reptxt_" + commentid).val();
+            if ($("#reptxt_" + commentid).val().replace(/\s/g, '').length == 0) {
+                $("#reptxt_" + commentid).css("border", "1px solid red");
+                return false;
+            }
+            // alert(loginid);
+            var Edate = firebase.database.ServerValue.TIMESTAMP;
+            commentsref.child(postid + '/' + commentid + '/' + commentid).push()
+           .set({
+               EntryDate: Edate,
+               Userid: loginid,
+               ComText: replytext
+           });
+           
+            usersref.child(loginid).once('value', function (imgurl) {
+                var dpRef = storref.child('/images/' + loginid);
+                dpRef.getDownloadURL().then(function (url) {
+                    var mydate = new Date().toDateString();
+                    $('#rep_' + commentid).append("<div>"
+                     + "<div class='col-md-3'><img class='pic' src='" + url + "'/></div>"
+                                                       + "<div class='col-md-9 commentdesign' >"
+                                                       + "<h5>" + imgurl.val().Name + "</h5> <p>" + mydate + "</p>"
+                                                        + "<p>" + replytext + "</p>"
+                                                       + "<hr></div>"
+                                                    + "</div>");
+                });
+            });
+            // $('#rep_' + commentid).append("<div>" + replytext + "</div>")
+            var like_count = parseInt($('#' + commentid).text().replace(" Reply", ""));
+            like_count = like_count + 1;
+            $('#' + commentid).text(like_count + " Reply");
+            $("#reptxt_" + commentid).val('');
+        }
+        // insert new comment on post
+
+        function clears() {
+            $('#txtcom').css("border", "1px solid #ccc");
+        }
+
+        function cleartxt(commentid) {
+            $('#reptxt_' + commentid).css("border", "1px solid #ccc");
+        }
+
+        function insertcomment(postid, loginid) {
+            var comtext = $('#txtcom').val();
+            if ($("#txtcom").val().replace(/\s/g, '').length == 0) {
+                $('#txtcom').css("border", "1px solid red");
+                return false;
+            }
+
+
+            var commentid = commentsref.push().key;
+            var Edate = firebase.database.ServerValue.TIMESTAMP;
+            ref.child('comments/' + postid + '/' + commentid)
+            .set({
+                EntryDate: Edate,
+                Userid: loginid,
+                ComText: comtext,
+            });
+            $('#txtcom').val('');
+            var commentdate = new Date().toDateString();
+            //alert(mydate1 + " " + Edate);
+            //user profile image
+          
+            usersref.child(loginid).once('value', function (imageurl) {
+                var dpRef = storref.child('/images/' + loginid);
+                dpRef.getDownloadURL().then(function (url) {
+                    $('.link_like').prepend("<div>"
+                                              + "<div class='col-md-2'><img class='pic' src='" + url + "'/></div>"
+                                              + "<div class='col-md-10 commentdesign'>"
+                                              + "<h5>" + imageurl.val().Name + "</h5><p>" + commentdate + "</p>"
+                                             // + "<p>" + comtext + "</p>"
+                                              + "<p>" + comtext + "<a id =" + commentid + " class='reply' data-toggle='collapse' data-target='#rep_" + commentid + "' onclick=reply('" + postid + "','" + loginid + "','" + commentid + "')>" + bindreplycount(commentid, postid) + "</a> <div style='clear:both;' id='rep_" + commentid + "' class='collapse'><input onblur=cleartxt('" + commentid + "') type='text' id='reptxt_" + commentid + "' style='width:60%;' /><button class='btn btn-danger' data-toggle='collapse' data-target='#rep_" + commentid + "' onclick=shows('" + postid + "','" + loginid + "','" + commentid + "')>Reply</button></div></p>"
+                                              + " </div>"
+                                           + "</div>")
+                });
+            });
+            var comment_count = parseInt($('.like_dislike1 .comment').text().replace(" comments", ""));
+            comment_count = comment_count + 1;
+            $('.like_dislike1 .comment').text(comment_count + " comments");
+            $('#com_' + postid + ' .badge').text(comment_count);
+        }
+
+
+        // bind reply comments on perticular comment
+        function bindcommentreply(postid, commentid) {
+           commentsref.child(postid + '/' + commentid + '/' + commentid).once('value', function (comsnap) {
+                //get all comments ids
+                comsnap.forEach(function (comdata) {
+                    var comid = comdata.val();
+                    var mydate = new Date(comid.EntryDate).toDateString();
+                    var Image_ref = usersref.child(comid.Userid);
+                    Image_ref.once('value', function (imgurl) {
+                        var dpRef = storref.child('/images/' + comid.Userid);
+                        dpRef.getDownloadURL().then(function (url) {
+                            $('#rep_' + commentid).append("<div>"
+                                                  + "<div class='col-md-3'><img class='pic' src='" + url + "'/></div>"
+                                                  + "<div class='col-md-9 commentdesign' >"
+                                                  + "<h5>" + imgurl.val().Name + "</h5> <p>" + mydate + "</p>"
+                                                   + "<p>" + comdata.val().ComText + "</p>"
+                                                  + "<hr></div>"
+                                               + "</div>");
+                        });
+                    });
+                });
+            });
+        }
+        // end comment section -----------------------------------------------------------------
+
+
+        function update(postid) {
+            var desc = $('#desctxt_' + postid).parent().siblings("p").text();
+            $('#desctxt_' + postid).val(desc);
+            // $('#editbtn').html("<span class='btn btn-primary'  onclick=updatedesc('" + postid + "')>Edit</span>")
+
+        }
+
+        // update post desc via postid
+        function updatedesc(postid) {
+            var desc = $('#desctxt_' + postid).val();
+            ref.child('Post/' + postid)
+            .update({ Description: desc });
+            $('#desctxt_' + postid).parent().siblings("p").text(desc);
+            $('#' + postid + ' div.content a.info p').text(desc);
+        }
+    </script>
+</body>
+</html>
